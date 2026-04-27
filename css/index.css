@@ -59,7 +59,7 @@ nav a img {
 .active:hover {
     background-color: #d9e5ff;
 }
-
+/* Forma de hacerlo explicado por la IA no conocia los not */
 nav a:not(.active):hover {
     background-color: rgba(0, 0, 0, 0.08);
 }
