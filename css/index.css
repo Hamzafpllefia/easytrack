@@ -30,9 +30,9 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-color: #ffffff;
+    background-color: rgb(255, 255, 255);
     border-radius: 12px;
-    box-shadow: inset -20px 0 20px rgba(99, 102, 241, 0.05);
+
 }
 ul {
     list-style: none;
