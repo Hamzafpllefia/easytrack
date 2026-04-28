@@ -183,3 +183,8 @@ input[type="text"] {
     width: 20px;
     height: 20px;
 }
+
+.container {
+    max-width: 600px;
+    width: 100%;
+}
