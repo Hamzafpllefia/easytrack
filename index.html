@@ -5,49 +5,56 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EasyTrack</title>
     <link rel="shortcut icon" href="img/logo-easytrack-solo.png" type="image/x-icon">
+    <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <nav>
-        <img src="img/logo-easytrack.png" alt="Logo de EasyTrack" width="200">
+        <a class="logo" href="index.html">
+            <img src="img/logo-easytrack.png" alt="Logo de EasyTrack" width="200">
+        </a>
         <ul>
-            <li><img src="img/logo-home.svg" alt="Logo de la página de inicio"><a href="index.html">Página de Inicio</a></li>
-            <li><img src="img/logo-como-trabajamos.svg" alt=""><a href="como-trabajamos.html">Cómo Trabajamos</a></li>
-            <li><img src="img/logo-preguntas-frecuentes.svg" alt=""><a href="preguntas-frecuentes.html">Preguntas Frecuentes</a></li>
+            <li><a href="index.html" class="active"><img src="img/active/logo-home.svg" alt="Logo de la página de inicio">Página de Inicio</a></li>
+            <li><a href="como-trabajamos.html"><img src="img/logo-como-trabajamos.svg" alt="">Cómo Trabajamos</a></li>
+            <li><a href="preguntas-frecuentes.html"><img src="img/logo-preguntas-frecuentes.svg" alt="">Preguntas Frecuentes</a></li>
         </ul>
-        <ul>
-            <li><img src="img/logo-ayuda.svg" alt=""><a href="ayuda.html">Ayuda</a></li>
-            <li><img src="img/logo-cerrar-sesion.svg" alt=""><a href="cerrar-sesion.html">Cerrar Sesión</a></li>
+        <ul class="bottom">
+            <li><a href="ayuda.html"><img src="img/logo-ayuda.svg" alt="">Ayuda</a></li>
+            <li><a href="cerrar-sesion.html"><img src="img/logo-cerrar-sesion.svg" alt="">Cerrar Sesión</a></li>
         </ul>
     </nav>
     <main>
-        <h1>¡Bienvenido a EasyTrack!</h1>
-        <p>Introduce tu número de seguimiento para empezar.</p>
-        <form action="#">
-            <div>
-                <label for="tracking-number">Número de seguimiento:</label>
-                <input type="text" id="tracking-number" placeholder="Ej 8572138299">
-                <div>
-                    <span>Método de seguimiento</span>
-                    <div>
-                        <input type="radio" name="tracking-method" id="email">
-                        <label for="email">
-                            <img src="img/logo-email.svg" alt="Icono correo electrónico">
-                            <strong>Correo Electrónico</strong>
-                            <p>Notificaciones al email</p>
-                        </label>
+        <div>
+            <h1>¡Bienvenido a EasyTrack!</h1>
+            <p class="p-center">Introduce tu número de seguimiento para empezar.</p>
+            <form action="#">
+                <div class="box">
+                    <label class="numero-seguimiento" for="tracking-number">NÚMERO DE SEGUIMIENTO:</label>
+                    <input type="text" id="tracking-number" placeholder="Ej 8572138299">
+                    <div class="metodo-seguimiento">
+                        <span class="titulo-metodo-seguimiento">MÉTODO DE SEGUIMIENTO</span>
+                        <div class="metodos-seguimiento">
+                            <div class="email">
+                                <label for="email">
+                                    <input type="radio" name="tracking-method" id="email">
+                                    <img src="img/logo-email.svg" alt="Icono correo electrónico">
+                                    <strong>Correo Electrónico</strong>
+                                    <p>Notificaciones al email</p>
+                                </label>
+                            </div>
+                            <div class="whatsapp">
+                                <label for="whatsapp">
+                                    <input type="radio" name="tracking-method" id="whatsapp">
+                                    <img src="img/logo-whatsapp.svg" alt="Icono WhatsApp" width="24px">
+                                    <strong>WhatsApp</strong>
+                                    <p>Notificaciones por WhatsApp</p>
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    <div>
-                        <input type="radio" name="tracking-method" id="whatsapp">
-                        <label for="whatsapp">
-                            <img src="img/logo-whatsapp.svg" alt="Icono WhatsApp" width="24px">
-                            <strong>WhatsApp</strong>
-                            <p>Notificaciones por WhatsApp</p>
-                        </label>
-                    </div>
+                    <button type="submit">Ver el estado del pedido</button>
                 </div>
-                <button type="submit">Ver el estado del pedido</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </main>
 </body>
 </html>
