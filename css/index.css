@@ -33,6 +33,10 @@ li {
     margin-bottom: 24px;
 }
 
+.bottom li {
+    margin-bottom: 12px;
+}
+
 nav a {
     color: inherit;
     text-decoration: none;
