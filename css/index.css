@@ -7,6 +7,11 @@
 }
 h1{
     text-align: center;
+    font-size: 48px;
+    font-weight: 900;
+    color: #191c1e;
+    margin: 0 0 12px 0;
+    letter-spacing: -0.5px;
 }
 
 body {
@@ -18,7 +23,7 @@ body {
 
 .box{
     background-color: #ffff;
-    padding: 40px;
+    padding: 60px;
     border-radius: 12px;
     box-shadow: inset -20px 0 20px rgba(99, 102, 241, 0.05);
 }
@@ -137,12 +142,18 @@ input[type="text"] {
 .email{
     background-color: #ffffff;
     border-radius: 12px;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+    flex: 1;
+    min-width: 200px;
 }
 
 .email label, .whatsapp label {
     cursor: pointer;
-    display: block;
-    padding: 10px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 15px;
     border-radius: 8px;
     transition: background-color 0.2s;
     width: 100%;
@@ -153,15 +164,66 @@ input[type="text"] {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
+/* Ocultar el radio nativo explicado por la IA porque no sabia como hacerlo */
+.email input[type="radio"],
+.whatsapp input[type="radio"] {
+    display: none;
+}
+
+/* Estilos para el icono explicado por la IA porque no sabia como hacerlo */
+.email label img,
+.whatsapp label img {
+    width: 24px;
+    height: 24px;
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+/* Contenedor para nombre y descripción explicado por la IA porque no sabia como hacerlo */
+.email label > div,
+.whatsapp label > div {
+    display: flex;
+    flex-direction: column;
+}
+
+.email label strong,
+.whatsapp label strong {
+    display: block;
+    font-weight: 700;
+    font-size: 14px;
+    margin-bottom: 4px;
+    line-height: 1.2;
+}
+
+.email label p,
+.whatsapp label p {
+    margin: 0;
+    font-size: 12px;
+    color: #767586;
+    display: block;
+    line-height: 1.2;
+}
+
 .whatsapp{
     background-color: #ffffff;
     border-radius: 12px;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+    flex: 1;
+    min-width: 200px;
 }
+
+/* Cuando el radio está checked, el contenedor (email/whatsapp) tiene borde lila explicado por la IA */
+.email:has(input[type="radio"]:checked),
+.whatsapp:has(input[type="radio"]:checked) {
+    border-color: #5456e3;
+}
+
 .btn {
     background-color: #5456e3;
     color: #fff;
     padding: 12px 20px;
-    width: 500px;
+    width: 100%;
     height: 70px;
     border: none;
     border-radius: 12px;
@@ -185,6 +247,11 @@ input[type="text"] {
 }
 
 .container {
-    max-width: 600px;
+    max-width: 700px;
+    height: 100%;
     width: 100%;
+    width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
