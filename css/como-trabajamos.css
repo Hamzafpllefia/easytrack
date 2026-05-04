@@ -1,4 +1,4 @@
-*{
+* {
     font-family: 'Inter', sans-serif;
 }
 
@@ -7,6 +7,18 @@ body {
     padding: 0;
     display: flex;
     background-color: #f5f7fa;
+}
+
+/* NAV */
+nav {
+    width: 200px;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #ffffff;
+    border-radius: 12px;
 }
 
 nav a {
@@ -19,17 +31,33 @@ nav a {
     margin: 0 -12px;
     border-radius: 12px;
     transition: background-color 0.2s;
-    cursor: pointer;
 }
 
 nav a img {
     width: 24px;
     height: 24px;
 }
-/* Explicado por la IA que no sabia como arreglarlo */
+
 nav > a:first-child img {
     width: 200px;
     height: auto;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+li {
+    margin-bottom: 24px;
+}
+
+.bottom {
+    margin-top: auto;
+}
+
+.bottom li {
+    margin-bottom: 12px;
 }
 
 .active {
@@ -37,37 +65,129 @@ nav > a:first-child img {
     color: #524dff;
 }
 
-.active:hover {
-    background-color: #d9e5ff;
-}
-/* Forma de hacerlo explicado por la IA no conocia los not */
 nav a:not(.active):hover {
     background-color: rgba(0, 0, 0, 0.08);
 }
 
-nav {
-    width: 200px;
-    padding: 20px;
-    min-height: 100vh;
+/* MAIN */
+main {
+    flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    background-color: rgb(255, 255, 255);
+    align-items: center;
+    padding: 40px;
+    gap: 18px;
+    text-align: center;
+}
+
+main h1 {
+    font-size: 42px;
+    margin: 0;
+}
+
+.intro-text {
+    max-width: 850px;
+    font-size: 18px;
+    color: #5f6573;
+}
+
+/* STEPS */
+.steps-grid {
+    width: 100%;
+    max-width: 1000px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+    margin-top: 50px;
+    margin-bottom: 10px;
+}
+
+.step-card {
+    background-color: #fff;
+    border: 1px solid #eaedf3;
     border-radius: 12px;
-
-}
-ul {
-    list-style: none;
-    padding: 0;
+    padding: 22px;
+    text-align: left;
 }
 
-.bottom {
-    margin-top: auto;
-}
-li {
-    margin-bottom: 24px;
+.step-card img {
+    width: 48px;
+    padding: 8px;
+    border-radius: 10px;
+    background-color: #f5f2ff;
 }
 
-.bottom li {
-    margin-bottom: 12px;
+.step-card:nth-child(2) img {
+    background-color: #f4ecff;
+}
+
+.step-card:nth-child(3) img {
+    background-color: #fbe8d8;
+}
+
+.step-number {
+    font-size: 40px;
+    font-weight: bold;
+    color: #d9dce5;
+}
+
+.step-card h2 {
+    font-size: 22px;
+    margin: 10px 0;
+}
+
+.step-text {
+    font-size: 15px;
+    color: #4d5562;
+}
+
+/* CTA */
+.cta-title {
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.cta-text {
+    max-width: 700px;
+    color: #5f6573;
+    margin-bottom: 20px;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 14px;
+    margin-top: 10px;
+}
+
+.cta-buttons button {
+    border: none;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.cta-buttons a:first-child button {
+    background-color: #5456e3;
+    color: white;
+}
+
+.cta-buttons a:last-child button {
+    background-color: #e7e9ef;
+}
+
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .steps-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .cta-buttons button {
+        width: 100%;
+    }
 }
