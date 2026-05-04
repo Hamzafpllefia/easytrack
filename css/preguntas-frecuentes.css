@@ -71,3 +71,50 @@ li {
 .bottom li {
     margin-bottom: 12px;
 }
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px;
+    width: 100%;
+}
+details {
+    width: 100%;
+    max-width: 600px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+details:hover {
+    background-color: #d9e5ff;
+}
+
+.btn{
+    background-color: #5456e3;
+    color: #fff;
+    padding: 12px 20px;
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    text-decoration: none;
+}
+.btn:hover {
+    background-color: #4a4ae0;
+}
