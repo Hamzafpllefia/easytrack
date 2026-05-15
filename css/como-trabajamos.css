@@ -1,7 +1,9 @@
-* {
+/* fuente para toda la pagina, inter queda bien */
+*{
     font-family: 'Inter', sans-serif;
 }
 
+/* el body lo ponemos en flex para que el nav y el main esten en fila */
 body {
     margin: 0;
     padding: 0;
@@ -9,7 +11,7 @@ body {
     background-color: #f5f7fa;
 }
 
-/* NAV */
+/* el menu lateral de la izquierda */
 nav {
     width: 200px;
     padding: 20px;
@@ -21,6 +23,7 @@ nav {
     border-radius: 12px;
 }
 
+/* estilos de todos los enlaces del nav */
 nav a {
     color: inherit;
     text-decoration: none;
@@ -33,43 +36,56 @@ nav a {
     transition: background-color 0.2s;
 }
 
+/* los iconos del menu miden 24x24 */
 nav a img {
     width: 24px;
     height: 24px;
 }
 
-nav > a:first-child img {
+/* el logo es mas grande, le ponemos 200px de ancho */
+.logo img {
     width: 200px;
     height: auto;
 }
 
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-li {
-    margin-bottom: 24px;
-}
-
-.bottom {
-    margin-top: auto;
-}
-
-.bottom li {
-    margin-bottom: 12px;
-}
-
+/* el enlace activo se pone con fondo lila clarito */
 .active {
     background-color: #eef2ff;
     color: #524dff;
 }
 
-nav a:not(.active):hover {
+/* cuando pasas el raton por el activo cambia un poco el fondo */
+.active:hover {
+    background-color: #d9e5ff;
+}
+
+/* hover para el resto de enlaces, gris suave */
+nav a:hover {
     background-color: rgba(0, 0, 0, 0.08);
 }
 
-/* MAIN */
+/* quitamos los puntitos de la lista */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* separacion entre cada item del menu */
+li {
+    margin-bottom: 24px;
+}
+
+/* el bottom lo empujamos abajo del todo con margin auto */
+.bottom {
+    margin-top: auto;
+}
+
+/* los del bottom tienen menos separacion */
+.bottom li {
+    margin-bottom: 12px;
+}
+
+/* el main centrado y con todo en columna */
 main {
     flex: 1;
     display: flex;
@@ -80,18 +96,20 @@ main {
     text-align: center;
 }
 
+/* titulo grande de la pagina */
 main h1 {
     font-size: 42px;
     margin: 0;
 }
 
+/* texto de introducion q no sea muy ancho */
 .intro-text {
     max-width: 850px;
     font-size: 18px;
     color: #5f6573;
 }
 
-/* STEPS */
+/* cuadricula pa poner los pasos, dividida en 3 columnas */
 .steps-grid {
     width: 100%;
     max-width: 1000px;
@@ -102,6 +120,7 @@ main h1 {
     margin-bottom: 10px;
 }
 
+/* la cajita blanca de cada paso */
 .step-card {
     background-color: #fff;
     border: 1px solid #eaedf3;
@@ -110,6 +129,7 @@ main h1 {
     text-align: left;
 }
 
+/* los iconitos de cada paso tienen fonditos de colores */
 .step-card img {
     width: 48px;
     padding: 8px;
@@ -117,6 +137,7 @@ main h1 {
     background-color: #f5f2ff;
 }
 
+/* el segundo y tercer icono tienen color distitno */
 .step-card:nth-child(2) img {
     background-color: #f4ecff;
 }
@@ -125,40 +146,46 @@ main h1 {
     background-color: #fbe8d8;
 }
 
+/* el numerito grande de fondo */
 .step-number {
     font-size: 40px;
     font-weight: bold;
     color: #d9dce5;
 }
 
+/* titulo de cada paso */
 .step-card h2 {
     font-size: 22px;
     margin: 10px 0;
 }
 
+/* textejo explicativo del paso */
 .step-text {
     font-size: 15px;
     color: #4d5562;
 }
 
-/* CTA */
+/* seccion pal final de la pagina animar al user */
 .cta-title {
     margin-top: 40px;
     margin-bottom: 20px;
 }
 
+/* textillo antes de los botones finales */
 .cta-text {
     max-width: 700px;
     color: #5f6573;
     margin-bottom: 20px;
 }
 
+/* contenedor para poner los botones en fla */
 .cta-buttons {
     display: flex;
     gap: 14px;
     margin-top: 10px;
 }
 
+/* estlio general d los botones del final */
 .cta-buttons button {
     border: none;
     border-radius: 10px;
@@ -167,16 +194,18 @@ main h1 {
     cursor: pointer;
 }
 
+/* el primer boton q sea el principal lila */
 .cta-buttons a:first-child button {
     background-color: #5456e3;
     color: white;
 }
 
+/* el segnudo botoin q sea gris secundario */
 .cta-buttons a:last-child button {
     background-color: #e7e9ef;
 }
 
-/* RESPONSIVE */
+/* si la pantaya es mas pkeña lo ponemos to en una columna q si no no kabe */
 @media (max-width: 900px) {
     .steps-grid {
         grid-template-columns: 1fr;
