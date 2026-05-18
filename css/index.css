@@ -1,10 +1,14 @@
+/* fuente para toda la pagina, inter queda bien */
 *{
     font-family: 'Inter', sans-serif;
 }
 
+/* esto centra el parrafo */
 .p-center{
     text-align: center;
 }
+
+/* estilos del titulo principal */
 h1{
     text-align: center;
     font-size: 48px;
@@ -14,6 +18,7 @@ h1{
     letter-spacing: -0.5px;
 }
 
+/* el body lo ponemos en flex para que el nav y el main esten en fila */
 body {
     margin: 0;
     padding: 0;
@@ -21,6 +26,7 @@ body {
     background-color: #f5f7fa;
 }
 
+/* la caja blanca del formulario */
 .box{
     background-color: #ffff;
     padding: 60px;
@@ -28,6 +34,7 @@ body {
     box-shadow: inset -20px 0 20px rgba(99, 102, 241, 0.05);
 }
 
+/* el menu lateral de la izquierda */
 nav {
     width: 200px;
     padding: 20px;
@@ -39,22 +46,29 @@ nav {
     border-radius: 12px;
 
 }
+
+/* quitamos los puntitos de la lista */
 ul {
     list-style: none;
     padding: 0;
 }
 
+/* el bottom lo empujamos abajo del todo con margin auto */
 .bottom {
     margin-top: auto;
 }
+
+/* separacion entre cada item del menu */
 li {
     margin-bottom: 24px;
 }
 
+/* los del bottom tienen menos separacion */
 .bottom li {
     margin-bottom: 12px;
 }
 
+/* estilos de todos los enlaces del nav */
 nav a {
     color: inherit;
     text-decoration: none;
@@ -68,29 +82,35 @@ nav a {
     cursor: pointer;
 }
 
+/* los iconos del menu miden 24x24 */
 nav a img {
     width: 24px;
     height: 24px;
 }
-/* Explicado por la IA que no sabia como arreglarlo */
-nav > a:first-child img {
+
+/* el logo es mas grande, le ponemos 200px de ancho */
+.logo img {
     width: 200px;
     height: auto;
 }
 
+/* el enlace activo se pone con fondo lila clarito */
 .active {
     background-color: #eef2ff;
     color: #524dff;
 }
 
+/* cuando pasas el raton por el activo cambia un poco el fondo */
 .active:hover {
     background-color: #d9e5ff;
 }
-/* Forma de hacerlo explicado por la IA no conocia los not */
-nav a:not(.active):hover {
+
+/* hover para el resto de enlaces, gris suave */
+nav a:hover {
     background-color: rgba(0, 0, 0, 0.08);
 }
 
+/* el main ocupa todo el espacio que queda y centra el contenido */
 main {
     flex: 1;
     display: flex;
@@ -98,7 +118,8 @@ main {
     align-items: center;
     padding: 40px;
 }
-/*  */
+
+/* input de texto para el numero de seguimiento */
 input[type="text"] {
     width: 100%;
     box-sizing: border-box;
@@ -115,6 +136,7 @@ input[type="text"] {
     background-size: 20px 20px;
 }
 
+/* titulo de la seccion de metodo de seguimiento */
 .titulo-metodo-seguimiento {
     display: block;
     margin-top: 20px;
@@ -122,12 +144,15 @@ input[type="text"] {
     font-weight: 700;
 }
 
+/* contenedor de las dos opciones email y whatsapp en fila */
 .metodos-seguimiento {
     display: flex;
     gap: 16px;
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
+
+/* caja gris de fondo donde estan las opciones */
 .metodo-seguimiento{
     background-color: #f0f2f5;
     padding: 15px;
@@ -135,10 +160,13 @@ input[type="text"] {
     margin-top: 25px;
     margin-bottom: 25px;
 }
+
+/* el numero de seguimiento en negrita */
 .numero-seguimiento{
     font-weight: 700;
 }
 
+/* tarjeta de la opcion email */
 .email{
     background-color: #ffffff;
     border-radius: 12px;
@@ -148,6 +176,7 @@ input[type="text"] {
     min-width: 200px;
 }
 
+/* el label ocupa todo y tiene flex para poner icono y texto en fila */
 .email label, .whatsapp label {
     cursor: pointer;
     display: flex;
@@ -160,32 +189,31 @@ input[type="text"] {
     box-sizing: border-box;
 }
 
+/* efecto hover al pasar el raton por la opcion */
 .email label:hover, .whatsapp label:hover {
     background-color: rgba(0, 0, 0, 0.05);
 }
 
-/* Ocultar el radio nativo explicado por la IA porque no sabia como hacerlo */
-.email input[type="radio"],
-.whatsapp input[type="radio"] {
+/* ocultamos el radio original del navegador, usamos nuestro propio estilo */
+.radio-oculto {
     display: none;
 }
 
-/* Estilos para el icono explicado por la IA porque no sabia como hacerlo */
-.email label img,
-.whatsapp label img {
+/* tamaño del icono de email o whatsapp */
+.icono-metodo {
     width: 24px;
     height: 24px;
     flex: 0 0 auto;
     margin-top: 2px;
 }
 
-/* Contenedor para nombre y descripción explicado por la IA porque no sabia como hacerlo */
-.email label > div,
-.whatsapp label > div {
+/* el nombre y la descripcino van uno debajo del otro */
+.info-metodo {
     display: flex;
     flex-direction: column;
 }
 
+/* nombre de la opcion en negrita */
 .email label strong,
 .whatsapp label strong {
     display: block;
@@ -195,6 +223,7 @@ input[type="text"] {
     line-height: 1.2;
 }
 
+/* descripcion pequeña debajo del nombre */
 .email label p,
 .whatsapp label p {
     margin: 0;
@@ -204,6 +233,7 @@ input[type="text"] {
     line-height: 1.2;
 }
 
+/* tarjeta de la opcion whatsapp, igual que email */
 .whatsapp{
     background-color: #ffffff;
     border-radius: 12px;
@@ -213,12 +243,13 @@ input[type="text"] {
     min-width: 200px;
 }
 
-/* Cuando el radio está checked, el contenedor (email/whatsapp) tiene borde lila explicado por la IA */
-.email:has(input[type="radio"]:checked),
-.whatsapp:has(input[type="radio"]:checked) {
+/* cuando se seleciona una opcion el borde se pone lila, lo hace javascript */
+.email.selected,
+.whatsapp.selected {
     border-color: #5456e3;
 }
 
+/* boton de enviar */
 .btn {
     background-color: #5456e3;
     color: #fff;
@@ -237,15 +268,19 @@ input[type="text"] {
     gap: 10px;
     position: relative;
 }
+
+/* hover del boton, se oscurece un poco */
 .btn:hover {
     background-color: #4244b8;
 }
 
+/* icono dentro del boton */
 .btn img {
     width: 20px;
     height: 20px;
 }
 
+/* contenedor principal que limita el ancho del formulario */
 .container {
     max-width: 700px;
     height: 100%;

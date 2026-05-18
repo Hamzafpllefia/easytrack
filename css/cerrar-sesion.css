@@ -1,7 +1,9 @@
+/* fuente para toda la pagina, inter queda bien */
 *{
     font-family: 'Inter', sans-serif;
 }
 
+/* el body lo ponemos en flex para que el nav y el main esten en fila */
 body {
     margin: 0;
     padding: 0;
@@ -9,6 +11,19 @@ body {
     background-color: #f5f7fa;
 }
 
+/* el menu lateral de la izquierda */
+nav {
+    width: 200px;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+    border-radius: 12px;
+}
+
+/* estilos de todos los enlaces del nav */
 nav a {
     color: inherit;
     text-decoration: none;
@@ -22,52 +37,51 @@ nav a {
     cursor: pointer;
 }
 
+/* los iconos del menu miden 24x24 */
 nav a img {
     width: 24px;
     height: 24px;
 }
-/* Explicado por la IA que no sabia como arreglarlo */
-nav > a:first-child img {
+
+/* el logo es mas grande, le ponemos 200px de ancho */
+.logo img {
     width: 200px;
     height: auto;
 }
 
+/* el enlace activo se pone con fondo lila clarito */
 .active {
     background-color: #eef2ff;
     color: #524dff;
 }
 
+/* cuando pasas el raton por el activo cambia un poco el fondo */
 .active:hover {
     background-color: #d9e5ff;
 }
-/* Forma de hacerlo explicado por la IA no conocia los not */
-nav a:not(.active):hover {
+
+/* hover para el resto de enlaces, gris suave */
+nav a:hover {
     background-color: rgba(0, 0, 0, 0.08);
 }
 
-nav {
-    width: 200px;
-    padding: 20px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: rgb(255, 255, 255);
-    border-radius: 12px;
-
-}
+/* quitamos los puntitos de la lista */
 ul {
     list-style: none;
     padding: 0;
 }
 
-.bottom {
-    margin-top: auto;
-}
+/* separacion entre cada item del menu */
 li {
     margin-bottom: 24px;
 }
 
+/* el bottom lo empujamos abajo del todo con margin auto */
+.bottom {
+    margin-top: auto;
+}
+
+/* los del bottom tienen menos separacion */
 .bottom li {
     margin-bottom: 12px;
 }
