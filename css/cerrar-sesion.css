@@ -37,6 +37,18 @@ nav a {
     cursor: pointer;
 }
 
+
+
+html,
+    body {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE y Edge */
+    }
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+        display: none; /* Chrome, Safari y Edge */
+    }
+
 /* los iconos del menu miden 24x24 */
 nav a img {
     width: 24px;
