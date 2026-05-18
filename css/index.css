@@ -3,6 +3,16 @@
     font-family: 'Inter', sans-serif;
 }
 
+html,
+    body {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE y Edge */
+    }
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+        display: none; /* Chrome, Safari y Edge */
+    }
+
 /* esto centra el parrafo */
 .p-center{
     text-align: center;
