@@ -172,8 +172,17 @@ main h1 {
     color: white;
 }
 
+.cta-buttons a:first-child button:hover {
+    background-color: #4244b8;
+}
+
+
 .cta-buttons a:last-child button {
     background-color: #e7e9ef;
+}
+
+.cta-buttons a:last-child button:hover {
+    background-color: #d0d4e0;
 }
 
 /* RESPONSIVE */

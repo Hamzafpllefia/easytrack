@@ -175,7 +175,7 @@ input[type="text"] {
 .whatsapp label img {
     width: 24px;
     height: 24px;
-    flex-shrink: 0;
+    flex: 0 0 auto;
     margin-top: 2px;
 }
 
