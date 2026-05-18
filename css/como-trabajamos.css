@@ -200,12 +200,28 @@ main h1 {
     color: white;
 }
 
+<<<<<<< HEAD
+.cta-buttons a:first-child button:hover {
+    background-color: #4244b8;
+}
+
+
+=======
 /* el segnudo botoin q sea gris secundario */
+>>>>>>> bd64718df26feef74af5430b6be81be32161cd3f
 .cta-buttons a:last-child button {
     background-color: #e7e9ef;
 }
 
+<<<<<<< HEAD
+.cta-buttons a:last-child button:hover {
+    background-color: #d0d4e0;
+}
+
+/* RESPONSIVE */
+=======
 /* si la pantaya es mas pkeña lo ponemos to en una columna q si no no kabe */
+>>>>>>> bd64718df26feef74af5430b6be81be32161cd3f
 @media (max-width: 900px) {
     .steps-grid {
         grid-template-columns: 1fr;
