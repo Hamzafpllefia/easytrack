@@ -1,7 +1,21 @@
+/* fuente para toda la pagina, inter queda bien */
 *{
     font-family: 'Inter', sans-serif;
 }
 
+html,
+    body {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE y Edge */
+    }
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+        display: none; /* Chrome, Safari y Edge */
+    }
+
+
+
+/* el body lo ponemos en flex para que el nav y el main esten en fila */
 body {
     margin: 0;
     padding: 0;
@@ -9,6 +23,19 @@ body {
     background-color: #f5f7fa;
 }
 
+/* el menu lateral de la izquierda */
+nav {
+    width: 200px;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+    border-radius: 12px;
+}
+
+/* estilos de todos los enlaces del nav */
 nav a {
     color: inherit;
     text-decoration: none;
@@ -22,52 +49,106 @@ nav a {
     cursor: pointer;
 }
 
+/* los iconos del menu miden 24x24 */
 nav a img {
     width: 24px;
     height: 24px;
 }
-/* Explicado por la IA que no sabia como arreglarlo */
-nav > a:first-child img {
+
+/* el logo es mas grande, le ponemos 200px de ancho */
+.logo img {
     width: 200px;
     height: auto;
 }
 
+/* el enlace activo se pone con fondo lila clarito */
 .active {
     background-color: #eef2ff;
     color: #524dff;
 }
 
+/* cuando pasas el raton por el activo cambia un poco el fondo */
 .active:hover {
     background-color: #d9e5ff;
 }
-/* Forma de hacerlo explicado por la IA no conocia los not */
-nav a:not(.active):hover {
+
+/* hover para el resto de enlaces, gris suave */
+nav a:hover {
     background-color: rgba(0, 0, 0, 0.08);
 }
 
-nav {
-    width: 200px;
-    padding: 20px;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background-color: rgb(255, 255, 255);
-    border-radius: 12px;
-
-}
+/* quitamos los puntitos de la lista */
 ul {
     list-style: none;
     padding: 0;
 }
 
-.bottom {
-    margin-top: auto;
-}
+/* separacion entre cada item del menu */
 li {
     margin-bottom: 24px;
 }
 
+/* el bottom lo empujamos abajo del todo con margin auto */
+.bottom {
+    margin-top: auto;
+}
+
+/* los del bottom tienen menos separacion */
 .bottom li {
     margin-bottom: 12px;
+}
+
+/* el main en columna para q las preguntas bajen */
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px;
+    width: 100%;
+}
+
+/* detalles de las preguntas como si fueran tarjetas */
+details {
+    width: 100%;
+    max-width: 600px;
+    background-color: #ffffff;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    margin-top: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: 1px solid transparent;
+}
+
+/* cuando pasas raton cambia el color un poqito */
+details:hover {
+    background-color: #d9e5ff;
+}
+
+/* el botoncito de ayuda abajo del todo */
+.btn{
+    background-color: #5456e3;
+    color: #fff;
+    padding: 12px 20px;
+    width: 200px;
+    height: 50px;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    position: relative;
+    text-decoration: none;
+}
+
+/* cuano le pasas el raton se oscurece */
+.btn:hover {
+    background-color: #4a4ae0;
 }
