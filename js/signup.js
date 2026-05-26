@@ -1,11 +1,13 @@
 // ============================================
-// LÓGICA DE LOGIN
+// LÓGICA DE REGISTRO
 // ============================================
 
 // Elementos del DOM
-const loginForm = document.getElementById('login-form');
+const signupForm = document.getElementById('signup-form');
+const fullnameInput = document.getElementById('fullname');
 const emailInput = document.getElementById('email');
 const passwordInput = document.getElementById('password');
+const passwordConfirmInput = document.getElementById('password-confirm');
 const errorMessage = document.getElementById('error-message');
 const successMessage = document.getElementById('success-message');
 const btnGoogle = document.getElementById('btn-google');
@@ -32,23 +34,47 @@ function showSuccess(message) {
     successMessage.style.display = 'block';
 }
 
-// Manejar login con email y contraseña
-loginForm.addEventListener('submit', async (e) => {
+// Validar contraseña
+function validatePassword(password) {
+    if (password.length < 6) {
+        return 'La contraseña debe tener al menos 6 caracteres';
+    }
+    return null;
+}
+
+// Manejar registro
+signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
+    const fullname = fullnameInput.value.trim();
     const email = emailInput.value.trim();
     const password = passwordInput.value;
+    const passwordConfirm = passwordConfirmInput.value;
     
-    if (!email || !password) {
+    // Validar campos
+    if (!fullname || !email || !password || !passwordConfirm) {
         showError('Por favor completa todos los campos');
+        return;
+    }
+    
+    // Validar contraseña
+    const passwordError = validatePassword(password);
+    if (passwordError) {
+        showError(passwordError);
+        return;
+    }
+    
+    // Validar que las contraseñas coincidan
+    if (password !== passwordConfirm) {
+        showError('Las contraseñas no coinciden');
         return;
     }
     
     try {
         // Mostrar estado de carga
-        const button = loginForm.querySelector('button[type="submit"]');
+        const button = signupForm.querySelector('button[type="submit"]');
         const originalText = button.textContent;
-        button.textContent = 'Iniciando sesión...';
+        button.textContent = 'Creando cuenta...';
         button.disabled = true;
         
         // Verificar conectividad
@@ -59,28 +85,35 @@ loginForm.addEventListener('submit', async (e) => {
             return;
         }
         
-        console.log('Intentando login con:', email);
+        console.log('Intentando registrar:', email);
         
-        // Intentar login
-        const { data, error } = await window.supabase.auth.signInWithPassword({
+        // Intentar registro
+        const { data, error } = await window.supabase.auth.signUp({
             email: email,
-            password: password
+            password: password,
+            options: {
+                data: {
+                    full_name: fullname
+                }
+            }
         });
         
         button.textContent = originalText;
         button.disabled = false;
         
         if (error) {
-            console.error('Error de login completo:', error);
+            console.error('Error de registro completo:', error);
             console.error('Mensaje:', error.message);
             console.error('Status:', error.status);
             
-            if (error.message.includes('Invalid login credentials')) {
-                showError('Email o contraseña incorrectos');
-            } else if (error.message.includes('Email not confirmed')) {
-                showError('Por favor confirma tu email antes de iniciar sesión');
+            if (error.message.includes('already registered')) {
+                showError('Este email ya está registrado');
+            } else if (error.message.includes('Invalid email')) {
+                showError('Email inválido');
             } else if (error.message.includes('Failed to fetch')) {
                 showError('Error de conexión con el servidor. Verifica tu conexión a internet e intenta de nuevo.');
+            } else if (error.message.includes('User already exists')) {
+                showError('Este email ya está registrado');
             } else {
                 showError(`Error: ${error.message || 'Error desconocido'}`);
             }
@@ -88,13 +121,18 @@ loginForm.addEventListener('submit', async (e) => {
         }
         
         if (data.user) {
-            showSuccess('¡Sesión iniciada correctamente! Redirigiendo...');
-            console.log('✅ Login exitoso:', data.user.email);
+            console.log('✅ Registro exitoso:', data.user.email);
             
-            // Redirigir después de 1.5 segundos
+            // Mostrar mensaje de éxito
+            showSuccess('¡Cuenta creada exitosamente! Verifica tu email para confirmar tu cuenta. Luego podrás iniciar sesión.');
+            
+            // Limpiar formulario
+            signupForm.reset();
+            
+            // Redirigir a login después de 3 segundos
             setTimeout(() => {
-                window.location.href = 'index.html';
-            }, 1500);
+                window.location.href = 'login.html';
+            }, 3000);
         }
         
     } catch (error) {
@@ -103,7 +141,7 @@ loginForm.addEventListener('submit', async (e) => {
     }
 });
 
-// Manejar login con Google
+// Manejar registro con Google
 btnGoogle.addEventListener('click', async () => {
     try {
         btnGoogle.disabled = true;
@@ -112,7 +150,7 @@ btnGoogle.addEventListener('click', async () => {
         const { data, error } = await window.supabase.auth.signInWithOAuth({
             provider: 'google',
             options: {
-                redirectTo: window.location.origin
+                redirectTo: window.location.origin + '/login.html'
             }
         });
         
@@ -120,14 +158,14 @@ btnGoogle.addEventListener('click', async () => {
             console.error('Error con Google:', error);
             showError('Error al conectar con Google. Intenta de nuevo.');
             btnGoogle.disabled = false;
-            btnGoogle.textContent = 'Iniciar sesión con Google';
+            btnGoogle.textContent = 'Registrarse con Google';
         }
         
     } catch (error) {
         console.error('Error inesperado con Google:', error);
         showError('Ocurrió un error inesperado.');
         btnGoogle.disabled = false;
-        btnGoogle.textContent = 'Iniciar sesión con Google';
+        btnGoogle.textContent = 'Registrarse con Google';
     }
 });
 
@@ -144,4 +182,4 @@ window.addEventListener('DOMContentLoaded', async () => {
     }
 });
 
-console.log('✅ Login.js cargado correctamente');
+console.log('✅ Signup.js cargado correctamente');
