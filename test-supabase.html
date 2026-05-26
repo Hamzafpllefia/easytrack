@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Supabase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        h1 { color: #333; }
+        .test-item {
+            margin: 20px 0;
+            padding: 15px;
+            background: #f9f9f9;
+            border-left: 4px solid #5456e3;
+            border-radius: 4px;
+        }
+        .success { border-left-color: #4caf50; }
+        .error { border-left-color: #f44336; }
+        .warning { border-left-color: #ff9800; }
+        code {
+            background: #f0f0f0;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        pre {
+            background: #f0f0f0;
+            padding: 10px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-size: 12px;
+        }
+        button {
+            background-color: #5456e3;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        button:hover {
+            background-color: #4244b8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🧪 Test de Supabase</h1>
+        
+        <div id="results"></div>
+
+        <button onclick="testSupabase()">Ejecutar Test</button>
+        <button onclick="testLogin()">Probar Login Email/Password</button>
+        <button onclick="testCORS()">Verificar CORS</button>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    
+    <script>
+        const SUPABASE_URL = 'https://djhyplvzn1kxaayskaju.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRqaHlwbHZ6bmFreGFheXNrYWp1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk3NDcwODYsImV4cCI6MjA5NTMyMzA4Nn0.FshawGDh4_m9gCz8NnX1i9npZizaD_9KxvD406q_cnc';
+
+        const resultsDiv = document.getElementById('results');
+
+        function addResult(title, message, type = 'warning') {
+            const div = document.createElement('div');
+            div.className = `test-item ${type}`;
+            div.innerHTML = `<strong>${title}:</strong> <pre>${message}</pre>`;
+            resultsDiv.appendChild(div);
+        }
+
+        async function testCORS() {
+            resultsDiv.innerHTML = '';
+            addResult('🔍 Verificando CORS', 'Intentando hacer fetch a Supabase...', 'warning');
+
+            try {
+                const response = await fetch(`${SUPABASE_URL}/auth/v1/health`, {
+                    method: 'GET',
+                    headers: {
+                        'apikey': SUPABASE_ANON_KEY,
+                    }
+                });
+                const data = await response.json();
+                addResult('✅ CORS OK', JSON.stringify(data, null, 2), 'success');
+            } catch (err) {
+                addResult('❌ Error CORS', err.message, 'error');
+            }
+        }
+
+        async function testSupabase() {
+            resultsDiv.innerHTML = '';
+            addResult('URL de Supabase', SUPABASE_URL, 'warning');
+            addResult('Anon Key (primeros 50 caracteres)', SUPABASE_ANON_KEY.substring(0, 50) + '...', 'warning');
+
+            // Test 1: ¿Se puede cargar Supabase?
+            if (window.supabase) {
+                addResult('✅ Supabase cargado', 'La librería de Supabase se cargó correctamente', 'success');
+            } else {
+                addResult('❌ Supabase NO cargado', 'No se puede acceder a window.supabase', 'error');
+                return;
+            }
+
+            // Test 2: ¿Se puede crear el cliente?
+            try {
+                const { createClient } = supabase;
+                const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                addResult('✅ Cliente Supabase creado', 'El cliente se inicializó correctamente', 'success');
+
+                // Test 3: ¿Se puede conectar?
+                try {
+                    const { data: { user }, error } = await client.auth.getUser();
+                    if (error) {
+                        addResult('⚠️ No hay usuario logueado', error.message, 'warning');
+                    } else if (user) {
+                        addResult('✅ Usuario detectado', `Email: ${user.email}`, 'success');
+                    } else {
+                        addResult('⚠️ Sin usuario', 'No hay sesión activa (esto es normal)', 'warning');
+                    }
+                } catch (err) {
+                    addResult('❌ Error al conectar', err.message, 'error');
+                }
+            } catch (err) {
+                addResult('❌ Error al crear cliente', err.message, 'error');
+            }
+        }
+
+        async function testLogin() {
+            resultsDiv.innerHTML = '';
+            addResult('🔐 Probando Login', 'Intentando con test@example.com', 'warning');
+
+            try {
+                const { createClient } = supabase;
+                const client = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+                const { data, error } = await client.auth.signInWithPassword({
+                    email: 'test@example.com',
+                    password: 'Test123456'
+                });
+
+                if (error) {
+                    addResult('❌ Error de Login', error.message, 'error');
+                    console.error('Error completo:', error);
+                } else if (data.user) {
+                    addResult('✅ Login exitoso', `Usuario: ${data.user.email}`, 'success');
+                } else {
+                    addResult('⚠️ Respuesta inesperada', JSON.stringify(data, null, 2), 'warning');
+                }
+            } catch (err) {
+                addResult('❌ Excepción', err.message, 'error');
+                console.error('Excepción completa:', err);
+            }
+        }
+
+        // Ejecutar test automático al cargar
+        window.addEventListener('load', testSupabase);
+    </script>
+</body>
+</html>

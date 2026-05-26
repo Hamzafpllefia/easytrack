@@ -237,3 +237,11 @@ h3:hover{
     cursor: pointer;
     padding: 0;
 }
+
+.boton1:hover {
+    background-color: #4745ce;
+}
+
+.boton2:hover {
+    background-color: #e0e3eb;
+}

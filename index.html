@@ -26,6 +26,20 @@
         </ul>
     </nav>
     <main>
+        <div class="header-user">
+            <button id="login-btn" class="btn-login">Iniciar Sesión</button>
+            <div id="user-profile" class="user-profile" style="display: none;">
+                <div class="user-info">
+                    <span id="user-email" class="user-email"></span>
+                </div>
+                <div class="avatar-container">
+                    <div id="avatar" class="avatar"></div>
+                    <div id="user-menu" class="user-menu" style="display: none;">
+                        <a href="#" id="logout-btn" class="menu-item logout">Cerrar Sesión</a>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div class="container">
             <h1>¡Bienvenido a EasyTrack!</h1>
             <p class="p-center">Introduce tu número de seguimiento para empezar.</p>
@@ -67,6 +81,9 @@
         </div>
     </main>
 
+    <!-- Importar Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="js/config-supabase.js"></script>
     <script src="js/index.js"></script>
 </body>
-</html>   
+</html>
