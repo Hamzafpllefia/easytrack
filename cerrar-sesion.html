@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cerrar Sesión</title>
+    <title>Cerrar Sesión - EasyTrack</title>
     <link rel="shortcut icon" href="img/logo-easytrack-solo.png" type="image/x-icon">
     <link rel="stylesheet" href="css/cerrar-sesion.css">
 </head>
@@ -25,5 +25,30 @@
             <li><a href="cerrar-sesion.html" class="active"><img src="img/active/logo-cerrar-sesion.svg" alt="Logo de Cerrar Sesión">Cerrar Sesión</a></li>
         </ul>
     </nav>
+
+    <main>
+        <div class="logout-container">
+            <div class="logout-icon">👋</div>
+            <h1>Cerrando sesión...</h1>
+            <p>Por favor espera un momento.</p>
+        </div>
+    </main>
+
+    <!-- Supabase v2 fijado -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/config-supabase.js"></script>
+    <script>
+        // Cerrar sesión automáticamente al cargar esta página
+        (async () => {
+            try {
+                await window.supabaseClient.auth.signOut();
+            } catch (err) {
+                console.error('Error al cerrar sesión:', err);
+            } finally {
+                // Redirigir siempre a index, aunque haya error
+                window.location.href = 'index.html';
+            }
+        })();
+    </script>
 </body>
 </html>

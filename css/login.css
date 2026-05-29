@@ -229,6 +229,11 @@ main {
     font-weight: 700;
     cursor: pointer;
     transition: background-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-family: inherit;
 }
 
 /* hover del botón Google */
@@ -258,20 +263,31 @@ main {
 /* mensajes de error y éxito */
 .error-message {
     margin-top: 15px;
-    padding: 12px;
-    background-color: #fee;
-    color: #c33;
+    padding: 12px 16px;
+    background-color: #fff0f0;
+    color: #c0392b;
     border-radius: 8px;
-    font-size: 12px;
-    display: none;
+    font-size: 13px;
+    display: none;  /* JS lo activa con style.display = 'block' */
+    border-left: 3px solid #e74c3c;
+    line-height: 1.4;
 }
 
 .success-message {
     margin-top: 15px;
-    padding: 12px;
-    background-color: #efe;
-    color: #3c3;
+    padding: 12px 16px;
+    background-color: #f0fff4;
+    color: #27ae60;
     border-radius: 8px;
-    font-size: 12px;
-    display: none;
+    font-size: 13px;
+    display: none;  /* JS lo activa con style.display = 'block' */
+    border-left: 3px solid #2ecc71;
+    line-height: 1.4;
+}
+
+/* estado deshabilitado de los botones mientras carga */
+.btn-submit:disabled,
+.btn-google:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
 }

@@ -97,3 +97,48 @@ li {
 .bottom li {
     margin-bottom: 12px;
 }
+
+/* el main ocupa todo el espacio que queda */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* contenedor de la pantalla de cierre */
+.logout-container {
+    text-align: center;
+    animation: fadeIn 0.4s ease;
+}
+
+.logout-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    animation: wave 1s ease infinite;
+    display: inline-block;
+}
+
+.logout-container h1 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #191c1e;
+    margin: 0 0 8px 0;
+}
+
+.logout-container p {
+    color: #767586;
+    font-size: 14px;
+    margin: 0;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes wave {
+    0%,100% { transform: rotate(0deg); }
+    25%      { transform: rotate(20deg); }
+    75%      { transform: rotate(-10deg); }
+}
