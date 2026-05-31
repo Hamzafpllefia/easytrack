@@ -36,7 +36,40 @@ nav {
     border-radius: 12px;
 }
 
-/* estilos de todos los enlaces del nav */
+/* el menu lateral de la izquierda */
+nav {
+    width: 200px;
+    padding: 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: rgb(255, 255, 255);
+    border-radius: 12px;
+}
+
+/* quitamos los puntitos de la lista */
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+/* el bottom lo empujamos abajo del todo */
+.bottom {
+    margin-top: auto;
+}
+
+/* separacion entre cada item del menu */
+li {
+    margin-bottom: 24px;
+}
+
+/* los del bottom tienen menos separacion */
+.bottom li {
+    margin-bottom: 12px;
+}
+
+/* estilos de todos los enlaces */
 nav a {
     color: inherit;
     text-decoration: none;
@@ -47,57 +80,35 @@ nav a {
     margin: 0 -12px;
     border-radius: 12px;
     transition: background-color 0.2s;
+    cursor: pointer;
 }
 
-/* los iconos del menu miden 24x24 */
+/* iconos */
 nav a img {
     width: 24px;
     height: 24px;
 }
 
-/* el logo es mas grande, le ponemos 200px de ancho */
+/* logo */
 .logo img {
     width: 200px;
     height: auto;
 }
 
-/* el enlace activo se pone con fondo lila clarito */
+/* enlace activo */
 .active {
     background-color: #eef2ff;
     color: #524dff;
 }
 
-/* cuando pasas el raton por el activo cambia un poco el fondo */
 .active:hover {
     background-color: #d9e5ff;
 }
 
-/* hover para el resto de enlaces, gris suave */
+/* hover normal */
 nav a:hover {
     background-color: rgba(0, 0, 0, 0.08);
 }
-
-/* quitamos los puntitos de la lista */
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-/* separacion entre cada item del menu */
-li {
-    margin-bottom: 24px;
-}
-
-/* el bottom lo empujamos abajo del todo con margin auto */
-.bottom {
-    margin-top: auto;
-}
-
-/* los del bottom tienen menos separacion */
-.bottom li {
-    margin-bottom: 12px;
-}
-
 /* el main centrado y con todo en columna */
 main {
     flex: 1;
