@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificar Supabase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .status {
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+        }
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .warning {
+            background-color: #fff3cd;
+            color: #856404;
+            border: 1px solid #ffeaa7;
+        }
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔍 Verificar Configuración de Supabase</h1>
+    
+    <div id="results"></div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="js/config-supabase.js"></script>
+    
+    <script>
+        const results = document.getElementById('results');
+        
+        async function checkSupabase() {
+            let html = '';
+            
+            // 1. Verificar que Supabase está cargado
+            if (!window.supabase) {
+                html += '<div class="status error">❌ Supabase no está cargado</div>';
+                results.innerHTML = html;
+                return;
+            }
+            html += '<div class="status success">✅ Supabase está cargado</div>';
+            
+            // 2. Verificar cliente
+            if (!window.supabase) {
+                html += '<div class="status error">❌ Cliente de Supabase no está configurado</div>';
+                results.innerHTML = html;
+                return;
+            }
+            html += '<div class="status success">✅ Cliente de Supabase está configurado</div>';
+            
+            // 3. Verificar conectividad
+            try {
+                const { data, error } = await window.supabase.auth.getSession();
+                if (error) {
+                    html += `<div class="status error">❌ Error al verificar sesión: ${error.message}</div>`;
+                } else {
+                    html += '<div class="status success">✅ Conexión con Supabase OK</div>';
+                }
+            } catch (err) {
+                html += `<div class="status error">❌ Error de conexión: ${err.message}</div>`;
+                html += '<div class="status warning">ℹ️ Verifica tu conexión a internet</div>';
+            }
+            
+            // 4. Información del navegador
+            html += '<div class="status warning">ℹ️ Información del navegador:</div>';
+            html += '<pre>' + JSON.stringify({
+                online: navigator.onLine,
+                userAgent: navigator.userAgent.substring(0, 100)
+            }, null, 2) + '</pre>';
+            
+            // 5. Logs de consola
+            html += '<div class="status warning">ℹ️ Abre la consola (F12) para ver más detalles de depuración</div>';
+            
+            results.innerHTML = html;
+        }
+        
+        // Ejecutar verificación
+        window.addEventListener('load', checkSupabase);
+    </script>
+</body>
+</html>

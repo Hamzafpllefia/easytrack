@@ -3,6 +3,18 @@
     font-family: 'Inter', sans-serif;
 }
 
+html,
+    body {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE y Edge */
+    }
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+        display: none; /* Chrome, Safari y Edge */
+    }
+
+
+
 /* el body lo ponemos en flex para que el nav y el main esten en fila */
 body {
     margin: 0;

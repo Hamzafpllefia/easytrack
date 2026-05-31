@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico Supabase</title>
+    <style>
+        body {
+            font-family: 'Courier New', monospace;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+        }
+        h1, h2 {
+            color: #00d9ff;
+        }
+        .section {
+            background-color: #2d2d2d;
+            border: 1px solid #444;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .status-ok {
+            color: #00ff00;
+        }
+        .status-error {
+            color: #ff4444;
+        }
+        .status-info {
+            color: #ffaa00;
+        }
+        pre {
+            background-color: #1a1a1a;
+            padding: 10px;
+            border-radius: 3px;
+            overflow-x: auto;
+            border-left: 3px solid #00d9ff;
+        }
+        button {
+            background-color: #00d9ff;
+            color: #000;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 0;
+            font-weight: bold;
+        }
+        button:hover {
+            background-color: #00a8cc;
+        }
+        .log-output {
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 3px;
+            max-height: 400px;
+            overflow-y: auto;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔧 Diagnóstico Completo de Supabase</h1>
+    
+    <div class="section">
+        <h2>1. Verificación de Carga</h2>
+        <div id="check-load"></div>
+    </div>
+    
+    <div class="section">
+        <h2>2. Configuración</h2>
+        <div id="check-config"></div>
+    </div>
+    
+    <div class="section">
+        <h2>3. Prueba de Conexión</h2>
+        <button onclick="testConnection()">🔄 Probar Conexión</button>
+        <div id="check-connection"></div>
+    </div>
+    
+    <div class="section">
+        <h2>4. Prueba de Registro (No envía datos reales)</h2>
+        <button onclick="testSignup()">📝 Probar Registro</button>
+        <div id="check-signup"></div>
+    </div>
+    
+    <div class="section">
+        <h2>5. Logs Detallados</h2>
+        <div id="logs" class="log-output">Esperando pruebas...</div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <script src="js/config-supabase.js"></script>
+    
+    <script>
+        let logs = [];
+        
+        function addLog(message, type = 'info') {
+            const timestamp = new Date().toLocaleTimeString();
+            logs.push(`[${timestamp}] ${type.toUpperCase()}: ${message}`);
+            document.getElementById('logs').innerHTML = logs.join('\n');
+            document.getElementById('logs').scrollTop = document.getElementById('logs').scrollHeight;
+        }
+        
+        function checkLoad() {
+            const output = document.getElementById('check-load');
+            let html = '';
+            
+            if (window.supabase) {
+                html += '<p class="status-ok">✅ Supabase está cargado</p>';
+            } else {
+                html += '<p class="status-error">❌ Supabase NO está cargado</p>';
+            }
+            
+            if (window.supabaseClient) {
+                html += '<p class="status-ok">✅ Cliente de Supabase está inicializado</p>';
+            } else {
+                html += '<p class="status-error">❌ Cliente de Supabase NO está inicializado</p>';
+            }
+            
+            output.innerHTML = html;
+            addLog('Verificación de carga completada');
+        }
+        
+        function checkConfig() {
+            const output = document.getElementById('check-config');
+            let html = '';
+            
+            if (!window.supabase) {
+                html += '<p class="status-error">❌ No se puede verificar configuración</p>';
+                output.innerHTML = html;
+                return;
+            }
+            
+            try {
+                const config = window.supabase._options || window.supabase.options || {};
+                html += '<p class="status-info">ℹ️ Información de Supabase:</p>';
+                html += '<pre>' + JSON.stringify({
+                    url: window.supabase.url || 'No disponible',
+                    hasAuth: !!window.supabase.auth,
+                    version: 'Última'
+                }, null, 2) + '</pre>';
+                
+                addLog('Configuración: ' + JSON.stringify({url: window.supabase.url}));
+            } catch (err) {
+                html += '<p class="status-error">❌ Error al obtener configuración: ' + err.message + '</p>';
+                addLog('Error al obtener config: ' + err.message, 'error');
+            }
+            
+            output.innerHTML = html;
+        }
+        
+        async function testConnection() {
+            const output = document.getElementById('check-connection');
+            output.innerHTML = '<p class="status-info">⏳ Probando conexión...</p>';
+            
+            try {
+                addLog('Iniciando prueba de conexión...');
+                
+                // Prueba 1: getSession
+                addLog('Probando getSession()...');
+                const { data: sessionData, error: sessionError } = await window.supabase.auth.getSession();
+                
+                if (sessionError) {
+                    addLog('Error en getSession: ' + sessionError.message, 'error');
+                    output.innerHTML += '<p class="status-error">❌ Error: ' + sessionError.message + '</p>';
+                } else {
+                    addLog('getSession() OK - Usuario: ' + (sessionData?.session?.user?.email || 'Ninguno'), 'success');
+                    output.innerHTML += '<p class="status-ok">✅ Conexión OK - No hay sesión activa</p>';
+                }
+                
+                // Prueba 2: Verificar if está online
+                addLog('Estado de red: ' + (navigator.onLine ? 'ONLINE' : 'OFFLINE'));
+                output.innerHTML += '<p class="status-info">Red: ' + (navigator.onLine ? 'En línea' : 'Sin conexión') + '</p>';
+                
+            } catch (err) {
+                addLog('Error de conexión: ' + err.message, 'error');
+                console.error('Error completo:', err);
+                output.innerHTML += '<p class="status-error">❌ Error: ' + err.message + '</p>';
+                output.innerHTML += '<pre>' + err.stack + '</pre>';
+            }
+        }
+        
+        async function testSignup() {
+            const output = document.getElementById('check-signup');
+            output.innerHTML = '<p class="status-info">⏳ Probando registro...</p>';
+            
+            try {
+                addLog('Iniciando prueba de registro...');
+                
+                // Datos de prueba
+                const testEmail = 'test-' + Date.now() + '@example.com';
+                const testPassword = 'TestPassword123!';
+                
+                addLog('Email de prueba: ' + testEmail);
+                addLog('Intentando signUp con Supabase...');
+                
+                const { data, error } = await window.supabase.auth.signUp({
+                    email: testEmail,
+                    password: testPassword,
+                    options: {
+                        data: { full_name: 'Test User' }
+                    }
+                });
+                
+                if (error) {
+                    addLog('Error en signUp: ' + error.message, 'error');
+                    addLog('Status: ' + (error.status || 'No disponible'), 'error');
+                    console.error('Error completo:', error);
+                    
+                    output.innerHTML += '<p class="status-error">❌ Error: ' + error.message + '</p>';
+                    output.innerHTML += '<pre>' + JSON.stringify(error, null, 2) + '</pre>';
+                } else {
+                    addLog('signUp() OK - Usuario creado o pendiente de confirmación', 'success');
+                    output.innerHTML += '<p class="status-ok">✅ Registro OK</p>';
+                    output.innerHTML += '<p class="status-info">ℹ️ Usuario: ' + data.user?.email + '</p>';
+                }
+                
+            } catch (err) {
+                addLog('Exception en signUp: ' + err.message, 'error');
+                console.error('Error completo:', err);
+                output.innerHTML += '<p class="status-error">❌ Exception: ' + err.message + '</p>';
+                output.innerHTML += '<pre>' + err.stack + '</pre>';
+            }
+        }
+        
+        // Inicializar
+        window.addEventListener('load', () => {
+            checkLoad();
+            checkConfig();
+            addLog('Página de diagnóstico cargada');
+        });
+        
+        // Capturar errores globales
+        window.addEventListener('error', (event) => {
+            addLog('Error global: ' + event.message, 'error');
+        });
+    </script>
+</body>
+</html>

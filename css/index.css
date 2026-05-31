@@ -3,6 +3,16 @@
     font-family: 'Inter', sans-serif;
 }
 
+html,
+    body {
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* IE y Edge */
+    }
+    html::-webkit-scrollbar,
+    body::-webkit-scrollbar {
+        display: none; /* Chrome, Safari y Edge */
+    }
+
 /* esto centra el parrafo */
 .p-center{
     text-align: center;
@@ -289,4 +299,125 @@ input[type="text"] {
     display: flex;
     flex-direction: column;
     justify-content: center;
+}
+
+/* contenedor del botón de login en la esquina superior derecha */
+.btn-login-container {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    z-index: 100;
+}
+
+/* botón de iniciar sesión */
+.btn-login {
+    background-color: #5456e3;
+    color: #ffffff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+/* hover del botón de login */
+.btn-login:hover {
+    background-color: #4244b8;
+}
+
+/* contenedor del header con usuario */
+.header-user {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* contenedor del perfil del usuario */
+.user-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* email del usuario */
+.user-email {
+    color: #191c1e;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+/* contenedor del avatar con menú */
+.avatar-container {
+    position: relative;
+}
+
+/* avatar con iniciales */
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #5456e3, #7570ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 16px;
+    cursor: pointer;
+    transition: transform 0.2s;
+    user-select: none;
+}
+
+/* hover del avatar */
+.avatar:hover {
+    transform: scale(1.1);
+}
+
+/* menú de usuario */
+.user-menu {
+    position: absolute;
+    top: 50px;
+    right: 0;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 180px;
+    overflow: hidden;
+    z-index: 101;
+}
+
+/* items del menú */
+.menu-item {
+    display: block;
+    padding: 12px 16px;
+    color: #191c1e;
+    text-decoration: none;
+    font-size: 14px;
+    transition: background-color 0.2s;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: left;
+    background: none;
+}
+
+/* hover del item */
+.menu-item:hover {
+    background-color: #f5f7fa;
+}
+
+/* item de logout */
+.menu-item.logout {
+    color: #c33;
+    border-top: 1px solid #e0e0e0;
+}
+
+.menu-item.logout:hover {
+    background-color: #fee;
 }
